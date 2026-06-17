@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — Acesse seu Workspace</title>
+<meta name="description" content="Faça login ou crie seu workspace no Nexus OS.">
+<link rel="stylesheet" href="../shared/globals.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body { overflow: hidden; }
+.auth-layout { display: flex; width: 100%; height: 100vh; position: relative; }
+.gear-center-stage { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 850px; height: 850px; z-index: 5; pointer-events: none; }
+.gear-half { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gear-left  { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); filter: invert(1) hue-rotate(180deg) brightness(1.7) contrast(0.9); opacity: .25; }
+.gear-right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); opacity: .15; }
+.gear-svg { width: 100%; height: 100%; overflow: visible; }
+@keyframes gearpop { 0%{opacity:0;transform:scale(0)} 60%{transform:scale(1.15)} 100%{opacity:1;transform:scale(1)} }
+@keyframes spinC { to{transform:rotate(360deg)} }
+@keyframes spinS { to{transform:rotate(-360deg)} }
+.auth-brand { flex:1; background:var(--dk); color:#EFE9E1; display:flex; flex-direction:column; justify-content:space-between; padding:60px; position:relative; }
+.auth-brand::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 20% 80%,rgba(201,168,76,.15) 0%,transparent 60%); z-index:1; pointer-events:none; }
+.brand-logo,.brand-content,.brand-footer { position:relative; z-index:10; }
+.brand-logo { display:flex; align-items:center; gap:12px; }
+.brand-logo .icon { width:36px; height:36px; background:#EFE9E1; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.brand-logo .name { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:700; color:#EFE9E1; }
+.brand-content { max-width:500px; margin:auto 0; }
+.brand-content h1 { font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:700; line-height:1.1; margin-bottom:24px; }
+.brand-content p { font-size:18px; color:rgba(239,233,225,.8); line-height:1.6; }
+.brand-footer { font-family:'Sora',sans-serif; font-size:10px; font-weight:600; color:rgba(239,233,225,.4); text-transform:uppercase; letter-spacing:1px; }
+.auth-form-wrapper { flex:1; display:flex; align-items:center; justify-content:center; padding:40px; position:relative; }
+.auth-card { position:relative; z-index:10; width:100%; max-width:440px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.8); border-radius:24px; padding:48px; backdrop-filter:blur(20px); box-shadow:0 16px 48px rgba(50,45,41,.04); }
+.auth-header { margin-bottom:32px; }
+.auth-header h2 { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:700; color:var(--dk); margin-bottom:8px; }
+.auth-header p { font-size:14px; color:var(--dk60); }
+.input-group { margin-bottom:20px; }
+.input-group label { display:block; font-family:'Sora',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--dk60); margin-bottom:8px; }
+.input-wrapper input { width:100%; background:rgba(255,255,255,.8); border:1px solid var(--dk12); border-radius:12px; padding:14px 16px; font-family:'Outfit',sans-serif; font-size:14px; color:var(--dk); outline:none; transition:all .3s; }
+.input-wrapper input:focus { border-color:var(--wine); background:#fff; box-shadow:0 4px 12px rgba(89,37,42,.08); }
+.input-wrapper input::placeholder { color:var(--dk40); }
+.form-options { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+.checkbox-lbl { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--dk60); cursor:pointer; }
+.checkbox-lbl input { accent-color:var(--wine); }
+.forgot-link { font-family:'Sora',sans-serif; font-size:11px; font-weight:600; color:var(--wine); text-decoration:none; }
+.btn-submit { width:100%; background:var(--dk); color:#fff; padding:16px; border-radius:12px; border:none; font-family:'Sora',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all .3s; box-shadow:0 8px 24px rgba(50,45,41,.1); margin-bottom:24px; }
+.btn-submit:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(50,45,41,.2); background:var(--wine); }
+.auth-switch { text-align:center; font-size:13px; color:var(--dk60); }
+.auth-switch a { font-weight:600; color:var(--dk); text-decoration:none; cursor:pointer; }
+.auth-switch a:hover { color:var(--wine); }
+.view-state { display:none; animation:fadeIn .4s ease forwards; }
+.view-state.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.back-link { display:inline-flex; align-items:center; gap:6px; font-family:'Sora',sans-serif; font-size:11px; font-weight:600; color:rgba(239,233,225,.5); text-decoration:none; transition:color .2s; margin-bottom:32px; position:relative; z-index:10; }
+.back-link:hover { color:rgba(239,233,225,.9); }
+@media (max-width:900px) { body{overflow:auto} .auth-layout{flex-direction:column;height:auto;min-height:100vh} .auth-brand{padding:40px;min-height:380px;flex:none;justify-content:center} .brand-content h1{font-size:40px;margin-top:24px} .auth-form-wrapper{padding:24px;align-items:flex-start} .gear-center-stage{top:25%;transform:translate(-50%,-50%) scale(.6)} .gear-left{clip-path:none;opacity:.15} .gear-right{display:none} }
+</style>
+</head>
+<body>
+<div class="brushed"></div>
+
+<svg width="0" height="0" style="position:absolute;width:0;height:0;">
+  <defs>
+    <linearGradient id="gradMain" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4A433D"/><stop offset="100%" stop-color="#1D1917"/></linearGradient>
+    <linearGradient id="gradEmpty" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0ECE6"/><stop offset="100%" stop-color="#D1C7BD"/></linearGradient>
+    <linearGradient id="gradPreset" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8C454B"/><stop offset="100%" stop-color="#4A2125"/></linearGradient>
+    <linearGradient id="gradApp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6B5D52"/><stop offset="100%" stop-color="#352E28"/></linearGradient>
+    <linearGradient id="gradRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2D2825"/><stop offset="100%" stop-color="#161311"/></linearGradient>
+    <filter id="shadow-3d" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#221E1C" flood-opacity="0.4"/></filter>
+  </defs>
+</svg>
+
+<div class="auth-layout">
+  <div class="gear-center-stage">
+    <div class="gear-half gear-left"><svg class="gear-svg" id="gear-svg-light" viewBox="-150 -150 300 300"></svg></div>
+    <div class="gear-half gear-right"><svg class="gear-svg" id="gear-svg-dark" viewBox="-150 -150 300 300"></svg></div>
+  </div>
+
+  <div class="auth-brand">
+    <div class="brand-logo">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#322D29" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#322D29"/></svg></div>
+      <span class="name">nexus</span>
+    </div>
+    <div class="brand-content">
+      <h1>Acesse seu<br>Workspace.</h1>
+      <p>Gerencie sua operação, acompanhe o desempenho dos seus Presets e retome o controle da sua rotina.</p>
+    </div>
+    <a href="index.html" class="back-link">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2L4 6l4 4" stroke-linecap="round"/></svg>
+      Voltar ao site
+    </a>
+  </div>
+
+  <div class="auth-form-wrapper">
+    <div class="auth-card">
+      <div id="view-login" class="view-state active">
+        <div class="auth-header"><h2>Bem-vindo de volta</h2><p>Insira suas credenciais para acessar a máquina.</p></div>
+        <form onsubmit="event.preventDefault();">
+          <div class="input-group"><label>E-mail</label><div class="input-wrapper"><input type="email" placeholder="seu@email.com" required></div></div>
+          <div class="input-group"><label>Senha</label><div class="input-wrapper"><input type="password" placeholder="••••••••" required></div></div>
+          <div class="form-options"><label class="checkbox-lbl"><input type="checkbox"> Lembrar neste dispositivo</label><a href="#" class="forgot-link">Esqueceu a senha?</a></div>
+          <button type="submit" class="btn-submit">Acessar Workspace</button>
+        </form>
+        <div class="auth-switch">Novo por aqui? <a onclick="toggleAuth('register')">Criar uma conta</a></div>
+      </div>
+
+      <div id="view-register" class="view-state">
+        <div class="auth-header"><h2>Criar Workspace</h2><p>Inicie sua jornada operacional em segundos.</p></div>
+        <form onsubmit="event.preventDefault();">
+          <div class="input-group"><label>Nome Completo</label><div class="input-wrapper"><input type="text" placeholder="Eduardo Silva" required></div></div>
+          <div class="input-group"><label>E-mail</label><div class="input-wrapper"><input type="email" placeholder="seu@email.com" required></div></div>
+          <div class="input-group"><label>Senha Segura</label><div class="input-wrapper"><input type="password" placeholder="Crie uma senha forte" required></div></div>
+          <button type="submit" class="btn-submit" style="background:var(--wine);margin-top:16px;">Finalizar Cadastro</button>
+        </form>
+        <div class="auth-switch">Já possui uma máquina? <a onclick="toggleAuth('login')">Fazer Login</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function createIconSvg(type,col){var NS='http://www.w3.org/2000/svg';var g=document.createElementNS(NS,'g');function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}function a(t,p){g.appendChild(mk(t,p));}if(type==='scissors'){a('circle',{cx:-4,cy:-4,r:2.4,stroke:col,'stroke-width':1.3,fill:'none'});a('circle',{cx:-4,cy:4,r:2.4,stroke:col,'stroke-width':1.3,fill:'none'});a('line',{x1:-2,y1:-2.5,x2:7,y2:6,stroke:col,'stroke-width':1.3,'stroke-linecap':'round'});a('line',{x1:-2,y1:2.5,x2:3,y2:-3,stroke:col,'stroke-width':1.3,'stroke-linecap':'round'});}else if(type==='bars'){a('rect',{x:-6,y:1,width:2.6,height:6,rx:1,fill:col,opacity:.85});a('rect',{x:-1.3,y:-2,width:2.6,height:9,rx:1,fill:col,opacity:.6});a('rect',{x:3.4,y:-5,width:2.6,height:12,rx:1,fill:col,opacity:.4});}else if(type==='target'){a('circle',{cx:0,cy:0,r:6,stroke:col,'stroke-width':1.3,fill:'none'});a('circle',{cx:0,cy:0,r:1,fill:col});}else if(type==='hex'){a('polygon',{points:'0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5',stroke:col,'stroke-width':1.3,fill:'none','stroke-linejoin':'round'});}return g;}
+function renderAuthGear(svgId){var NS='http://www.w3.org/2000/svg';var svg=document.getElementById(svgId);if(!svg)return;var SLOTS=10,Zc=20,Zs=8,mod=6.2,Rc=(Zc*mod)/2,Rs=(Zs*mod)/2,cd=Rc+Rs,Wc=22,Ws=Wc*(Zs/Zc);var gearData=[{i:0,icon:'scissors',preset:true},{i:2,icon:'bars',preset:false},{i:4,icon:'target',preset:false},{i:6,icon:'hex',preset:false}];var om={};gearData.forEach(function(o){om[o.i]=o;});function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}function gp(Z,rO,rR){var s=(Math.PI*2)/Z,tw=s*.3,d='';function pt(a,r){return[(Math.cos(a)*r).toFixed(2),(Math.sin(a)*r).toFixed(2)];}for(var t=0;t<Z;t++){var a=t*s;var p1=pt(a-tw,rR),p2=pt(a-tw*.5,rO),p3=pt(a+tw*.5,rO),p4=pt(a+tw,rR),nx=pt((t+1)*s-tw,rR);if(t===0)d+='M'+p1[0]+','+p1[1];d+=' L'+p2[0]+','+p2[1]+' L'+p3[0]+','+p3[1]+' L'+p4[0]+','+p4[1]+' A'+rR+','+rR+' 0 0 1 '+nx[0]+','+nx[1];}return d+' Z';}for(var s=0;s<SLOTS;s++){var ang=(s/SLOTS)*Math.PI*2-Math.PI/2,cx=Math.cos(ang)*cd,cy=Math.sin(ang)*cd,o=om[s];if(o){var outer=mk('g',{transform:'translate('+cx.toFixed(2)+','+cy.toFixed(2)+')'});var pop=mk('g',{style:'transform-box:fill-box;transform-origin:center;animation:gearpop .5s ease '+(s*.06)+'s both',filter:'url(#shadow-3d)'});var spin=mk('g',{style:'transform-box:fill-box;transform-origin:center;animation:spinS '+Ws.toFixed(2)+'s linear infinite'});var fillUrl=o.preset?'url(#gradPreset)':'url(#gradApp)';var strokeCol=o.preset?'#4A2125':'#352E28';spin.appendChild(mk('path',{d:gp(Zs,Rs+mod*.55,Rs-mod*.18),fill:fillUrl,stroke:strokeCol,'stroke-width':1.5}));pop.appendChild(spin);pop.appendChild(mk('circle',{cx:0,cy:0,r:Rs*.65,fill:'#F7F4F0',stroke:strokeCol,'stroke-width':2}));pop.appendChild(mk('circle',{cx:0,cy:0,r:Rs*.55,fill:'none',stroke:'rgba(50,45,41,0.06)','stroke-width':1}));var ic=createIconSvg(o.icon,strokeCol);ic.setAttribute('transform','scale(0.85)');pop.appendChild(ic);outer.appendChild(pop);svg.appendChild(outer);}else{var outerEmpty=mk('g',{transform:'translate('+cx.toFixed(2)+','+cy.toFixed(2)+')'});var emptyGear=mk('g',{style:'transform-box:fill-box;transform-origin:center;animation:gearpop .5s ease '+(s*.06)+'s both',opacity:.25});emptyGear.appendChild(mk('path',{d:gp(Zs,Rs+mod*.55,Rs-mod*.18),fill:'url(#gradEmpty)',stroke:'rgba(50,45,41,.15)','stroke-width':1}));outerEmpty.appendChild(emptyGear);svg.appendChild(outerEmpty);}}var cW=mk('g',{filter:'url(#shadow-3d)'}),cS=mk('g',{style:'transform-box:fill-box;transform-origin:center;animation:spinC '+Wc.toFixed(2)+'s linear infinite'});cS.appendChild(mk('path',{d:gp(Zc,Rc+mod*.55,Rc-mod*.18),fill:'url(#gradMain)',stroke:'#1D1917','stroke-width':2}));cW.appendChild(cS);cW.appendChild(mk('circle',{cx:0,cy:0,r:Rc*.55,fill:'url(#gradRim)',stroke:'#110F0E','stroke-width':2}));cW.appendChild(mk('circle',{cx:0,cy:0,r:Rc*.48,fill:'url(#gradMain)',stroke:'rgba(255,255,255,0.05)','stroke-width':1.5}));svg.appendChild(cW);}
+document.addEventListener('DOMContentLoaded',function(){renderAuthGear('gear-svg-light');renderAuthGear('gear-svg-dark');});
+function toggleAuth(view){document.getElementById('view-login').classList.remove('active');document.getElementById('view-register').classList.remove('active');document.getElementById(view==='register'?'view-register':'view-login').classList.add('active');}
+</script>
+</body>
+</html>

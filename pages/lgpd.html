@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — Central Jurídica</title>
+<meta name="description" content="Termos de uso, política de privacidade LGPD e cookies do Nexus OS.">
+<link rel="stylesheet" href="../shared/globals.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body { display:flex; flex-direction:column; }
+/* NAV — fundo escuro no hero */
+.inst-nav { padding:16px 6%; display:flex; justify-content:space-between; align-items:center; position:absolute; top:0; left:0; right:0; z-index:100; border-bottom:1px solid rgba(255,255,255,.1); background:transparent; backdrop-filter:none; }
+.inst-nav .nav-brand .name { color:#EFE9E1; }
+.inst-nav .btn-login { color:#EFE9E1; border:1px solid rgba(255,255,255,.2); border-radius:8px; padding:10px 20px; }
+.inst-nav .btn-login:hover { background:rgba(255,255,255,.1); }
+.inst-nav .btn-cta { background:var(--gold); }
+.inst-nav .nav-brand .icon { background:#EFE9E1; }
+.nav-links > a { font-family:'Sora',sans-serif; font-size:12px; font-weight:500; color:rgba(255,255,255,.7); text-decoration:none; transition:color .3s; }
+.nav-links > a:hover { color:#fff; }
+
+/* HERO */
+.legal-hero { background:var(--dk); color:#EFE9E1; padding:140px 6% 80px; text-align:center; position:relative; overflow:hidden; }
+.legal-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 100%,rgba(201,168,76,.08) 0%,transparent 60%); pointer-events:none; }
+.hero-eyebrow { font-family:'Sora',sans-serif; font-size:11px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:2px; margin-bottom:16px; display:block; position:relative; z-index:2; }
+.legal-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(40px,5vw,56px); font-weight:700; line-height:1.1; margin-bottom:16px; position:relative; z-index:2; }
+.legal-hero p { font-size:16px; color:rgba(239,233,225,.6); max-width:500px; margin:0 auto; position:relative; z-index:2; }
+
+/* LAYOUT */
+.container { max-width:1200px; margin:0 auto; padding:80px 40px 120px; flex:1; }
+.showcase-layout { display:flex; gap:60px; min-height:500px; }
+.showcase-nav { flex:0 0 320px; display:flex; flex-direction:column; gap:24px; border-left:2px solid var(--dk07); padding-left:32px; position:relative; height:fit-content; }
+.nav-indicator { position:absolute; left:-2px; top:0; width:2px; height:40px; background:var(--wine); transition:transform .3s cubic-bezier(.4,0,.2,1); }
+.tab-btn { background:none; border:none; text-align:left; cursor:pointer; padding:8px 0; outline:none; }
+.tab-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--dk40); transition:all .3s; line-height:1.2; }
+.tab-desc { font-family:'Outfit',sans-serif; font-size:14px; color:var(--dk40); height:0; overflow:hidden; opacity:0; transition:all .3s; margin-top:8px; }
+.tab-btn.active .tab-title { color:var(--dk); font-size:32px; font-weight:700; }
+.tab-btn.active .tab-desc { height:auto; opacity:1; color:var(--dk60); margin-bottom:16px; }
+.showcase-stage { flex:1; position:relative; display:grid; grid-template-columns:1fr; align-items:start; }
+.showcase-panel { grid-area:1/1; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); border-radius:32px; padding:48px; backdrop-filter:blur(20px); box-shadow:0 16px 48px rgba(50,45,41,.04); opacity:0; pointer-events:none; transform:translateY(20px); transition:all .4s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; }
+.showcase-panel.active { opacity:1; pointer-events:auto; transform:translateY(0); z-index:2; }
+.panel-header { display:flex; align-items:center; gap:16px; margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid var(--dk12); }
+.panel-icon { width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center; }
+.icon-wine { background:rgba(114,56,61,.1); color:var(--wine); }
+.icon-gold { background:rgba(201,168,76,.15); color:var(--gold); }
+.icon-dark { background:rgba(50,45,41,.08); color:var(--dk); }
+.panel-tag { font-family:'Sora',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--dk60); }
+.panel-title { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:700; color:var(--dk); margin-bottom:4px; }
+.legal-body h3 { font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--dk); margin:32px 0 12px; }
+.legal-body p { font-size:15px; color:var(--dk60); line-height:1.7; margin-bottom:16px; }
+.legal-body ul { padding-left:20px; margin-bottom:24px; }
+.legal-body li { font-size:15px; color:var(--dk60); line-height:1.7; margin-bottom:8px; }
+.legal-body strong { color:var(--dk); font-weight:600; }
+@media (max-width:900px) { .showcase-layout{flex-direction:column;gap:40px} .showcase-nav{flex:none;flex-direction:row;overflow-x:auto;border-left:none;border-bottom:2px solid var(--dk07);padding-left:0;padding-bottom:16px} .showcase-panel{padding:32px 24px} }
+@media (max-width:768px) { .nav-links{display:none} }
+</style>
+</head>
+<body>
+<div class="brushed"></div>
+
+<nav class="inst-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#322D29" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#322D29"/></svg></div>
+    <span class="name">nexus</span>
+  </a>
+  <div class="nav-links">
+    <a href="sobre.html">Sobre o Nexus</a>
+    <a href="precos.html">Preços</a>
+    <a href="vendas.html">Enterprise</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-login">Entrar</a>
+    <a href="login.html#signup" class="btn-cta">Experimente</a>
+  </div>
+</nav>
+
+<header class="legal-hero">
+  <span class="hero-eyebrow">Legal & Compliance</span>
+  <h1>Central Jurídica</h1>
+  <p>Transparência total sobre como operamos, protegemos seus dados e garantimos a segurança do seu negócio.</p>
+</header>
+
+<main class="container">
+  <section class="showcase-layout">
+    <div class="showcase-nav" id="tab-nav">
+      <div class="nav-indicator" id="indicator"></div>
+      <button class="tab-btn active" onclick="switchTab(0,'termos')"><div class="tab-title">Termos de Uso</div><div class="tab-desc">Regras de utilização do motor Nexus, pagamentos e limites de APIs terceiras.</div></button>
+      <button class="tab-btn" onclick="switchTab(1,'privacidade')"><div class="tab-title">Privacidade</div><div class="tab-desc">Como atuamos em conformidade com a LGPD e o isolamento dos seus dados.</div></button>
+      <button class="tab-btn" onclick="switchTab(2,'cookies')"><div class="tab-title">Cookies</div><div class="tab-desc">Transparência sobre rastreamento e autenticação de segurança.</div></button>
+    </div>
+
+    <div class="showcase-stage">
+      <div class="showcase-panel active" id="panel-termos">
+        <div class="panel-header"><div class="panel-icon icon-dark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="panel-tag">Atualizado: 15/06/2026</div><h2 class="panel-title">Termos de Serviço</h2></div></div>
+        <div class="legal-body">
+          <p>Ao acessar ou usar nossa plataforma, você concorda em ficar vinculado a estes Termos de Serviço e a todas as leis e regulamentos aplicáveis.</p>
+          <h3>1. Definição do Serviço</h3>
+          <p>O Nexus fornece um software modular na nuvem (SaaS) projetado para orquestrar processos de atendimento, vendas e agendamentos, integrando-se a plataformas de terceiros como <strong>Meta Platforms (WhatsApp)</strong> e <strong>Google LLC (Google Calendar)</strong>.</p>
+          <ul><li>A operação de módulos requer o consumo de "Slots" do seu plano.</li><li>O funcionamento ininterrupto de integrações depende da disponibilidade das empresas parceiras.</li></ul>
+          <h3>2. Regras da API WhatsApp</h3>
+          <p>Ao utilizar o módulo de transbordo via WhatsApp, o Cliente concorda em cumprir as políticas de uso aceitável da Meta. <strong>O Nexus não se responsabiliza por bloqueios</strong> resultantes de spam ou violações pelo Cliente.</p>
+          <h3>3. Pagamentos e Retenção</h3>
+          <p>Custos adicionais de IA que excedam os limites do plano serão calculados sob o modelo de "Day-Usage". Após o cancelamento, reteremos seus dados por 30 dias para garantir a portabilidade antes da exclusão definitiva.</p>
+        </div>
+      </div>
+
+      <div class="showcase-panel" id="panel-privacidade">
+        <div class="panel-header"><div class="panel-icon icon-wine"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="panel-tag">Em Conformidade LGPD</div><h2 class="panel-title">Política de Privacidade</h2></div></div>
+        <div class="legal-body">
+          <p>A Nexus compromete-se a proteger a privacidade dos seus dados em total conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong>.</p>
+          <h3>1. O Papel do Nexus</h3>
+          <p>No escopo da LGPD, o Contratante é o Controlador dos dados. O Nexus atua estritamente como <strong>Operador</strong>, processando dados exclusivamente para executar as funções configuradas por você.</p>
+          <h3>2. Processamento por IA</h3>
+          <p>Garantimos que nossos parceiros de LLMs seguem protocolos rigorosos:</p>
+          <ul><li>Modelos de IA <strong>não</strong> são treinados com seus dados privados.</li><li>Informações processadas possuem camada de ofuscação de dados sensíveis.</li><li>Não vendemos nem alugamos listas de contatos capturadas.</li></ul>
+          <h3>3. Integração Google Calendar</h3>
+          <p>Acessaremos apenas as agendas selecionadas expressamente via OAuth, com o único fim de inserir ou ler blocos de horário para o cálculo de disponibilidade do robô.</p>
+        </div>
+      </div>
+
+      <div class="showcase-panel" id="panel-cookies">
+        <div class="panel-header"><div class="panel-icon icon-gold"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a5 5 0 0 0-5 5v2a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/></svg></div><div><div class="panel-tag">Segurança de Sessão</div><h2 class="panel-title">Política de Cookies</h2></div></div>
+        <div class="legal-body">
+          <p>Utilizamos cookies e tecnologias semelhantes para garantir o funcionamento da plataforma e melhorar sua experiência.</p>
+          <h3>Cookies Estritamente Necessários</h3>
+          <p>Essenciais para o uso seguro da plataforma. Armazenam tokens de autenticação do seu Workspace para evitar login repetitivo.</p>
+          <h3>Cookies Analíticos</h3>
+          <p>Coletam informações anônimas sobre como a aplicação é utilizada, ajudando nossos engenheiros a identificar lentidão em módulos ou páginas com erro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="mega-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="f-brand-logo"><div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#322D29" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#322D29"/></svg></div><span class="name">Nexus</span></div><p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.6;max-width:250px;">O sistema operacional modular para empreendedores que desejam retomar o tempo.</p></div>
+    <div class="footer-col"><h4>Produtos</h4><ul><li><a href="presets.html">Apps e Presets</a></li><li><a href="precos.html">Preços</a></li></ul></div>
+    <div class="footer-col"><h4>Empresa</h4><ul><li><a href="sobre.html">Sobre o Nexus</a></li><li><a href="vendas.html">Enterprise</a></li><li><a href="lgpd.html">Central Jurídica</a></li></ul></div>
+    <div class="footer-col"><h4>Acesso</h4><ul><li><a href="login.html">Entrar</a></li><li><a href="login.html#signup">Criar Workspace</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>BY NEXUS TECHNOLOGIES</span><span>© 2026 TODOS OS DIREITOS RESERVADOS</span></div>
+</footer>
+
+<script>
+function switchTab(index,panelId){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn')[index].classList.add('active');
+  const offset=document.querySelectorAll('.tab-btn')[index].offsetTop;
+  if(window.innerWidth>900) document.getElementById('indicator').style.transform=`translateY(${offset}px)`;
+  document.querySelectorAll('.showcase-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+panelId).classList.add('active');
+}
+</script>
+</body>
+</html>

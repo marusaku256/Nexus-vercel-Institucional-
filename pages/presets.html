@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — Apps e Presets</title>
+<meta name="description" content="Explore os motores operacionais do Nexus. Barber Pro, CRM Hub, Finance Flow e mais.">
+<link rel="stylesheet" href="../shared/globals.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+.solutions-header { padding: 100px 0 80px; text-align: center; }
+.solutions-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 72px); font-weight: 700; color: var(--dk); line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+.solutions-subtitle { font-size: 18px; color: var(--dk60); max-width: 650px; margin: 0 auto; line-height: 1.6; }
+.showcase-layout { display: flex; gap: 60px; margin-bottom: 120px; min-height: 500px; }
+.showcase-nav { flex: 0 0 350px; display: flex; flex-direction: column; gap: 24px; border-left: 2px solid var(--dk07); padding-left: 32px; position: relative; }
+.nav-indicator { position: absolute; left: -2px; top: 0; width: 2px; height: 40px; background: var(--wine); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+.tab-btn { background: none; border: none; text-align: left; cursor: pointer; padding: 8px 0; outline: none; }
+.tab-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--dk40); transition: all 0.3s; line-height: 1.2; }
+.tab-desc { font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--dk40); height: 0; overflow: hidden; opacity: 0; transition: all 0.3s; margin-top: 8px; }
+.tab-btn.active .tab-title { color: var(--dk); font-size: 36px; font-weight: 700; }
+.tab-btn.active .tab-desc { height: auto; opacity: 1; color: var(--dk60); }
+.showcase-stage { flex: 1; position: relative; min-height: 500px; }
+.showcase-panel { position: absolute; inset: 0; background: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.9); border-radius: 32px; padding: 48px; backdrop-filter: blur(20px); box-shadow: 0 16px 48px rgba(50,45,41,.04); opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+.showcase-panel.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.panel-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.panel-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+.icon-wine { background: rgba(114,56,61,.1); color: var(--wine); }
+.icon-gold { background: rgba(201,168,76,.15); color: var(--gold); }
+.icon-dark { background: rgba(50,45,41,.08); color: var(--dk); }
+.panel-tag { font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--dk60); }
+.panel-title { font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 700; color: var(--dk); margin-bottom: 16px; }
+.panel-desc { font-size: 16px; color: var(--dk60); line-height: 1.6; margin-bottom: 32px; }
+.panel-features { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: auto; }
+.panel-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--dk); font-weight: 500; }
+.check-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+.panel-actions { display: flex; align-items: center; gap: 16px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--dk12); }
+.price-tag { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; color: var(--dk); }
+.price-tag span { font-size: 10px; font-weight: 500; color: var(--dk40); text-transform: uppercase; }
+@media (max-width: 900px) { .showcase-layout { flex-direction: column; } .showcase-nav { flex: none; flex-direction: row; overflow-x: auto; border-left: none; border-bottom: 2px solid var(--dk07); padding-left: 0; padding-bottom: 16px; } .showcase-stage { min-height: 500px; } .showcase-panel { position: static; display: none; } .showcase-panel.active { display: flex; } }
+</style>
+</head>
+<body>
+<div class="brushed"></div>
+<nav class="inst-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#EFE9E1" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#EFE9E1"/></svg></div>
+    <span class="name">nexus</span>
+  </a>
+  <div class="nav-links">
+    <a href="sobre.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Sobre o Nexus</a>
+    <a href="presets.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--dk);text-decoration:none;">Apps e Presets</a>
+    <a href="precos.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Preços</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-login">Entrar</a>
+    <a href="login.html#signup" class="btn-cta">Experimente o Nexus</a>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="solutions-header">
+    <h1 class="solutions-title">Soluções modulares.</h1>
+    <p class="solutions-subtitle">Explore nossos motores operacionais criados para plugar e rodar. Selecione uma ferramenta para ver como o Nexus transforma a sua rotina.</p>
+  </section>
+
+  <section class="showcase-layout">
+    <div class="showcase-nav" id="tab-nav">
+      <div class="nav-indicator" id="indicator"></div>
+      <button class="tab-btn active" onclick="switchTab(0,'barber')"><div class="tab-title">Barber Pro</div><div class="tab-desc">Motor completo de atendimento, agendamento e transbordo para salões.</div></button>
+      <button class="tab-btn" onclick="switchTab(1,'crm')"><div class="tab-title">CRM Hub</div><div class="tab-desc">Diretório inteligente que classifica leads e calcula LTV em tempo real.</div></button>
+      <button class="tab-btn" onclick="switchTab(2,'finance')"><div class="tab-title">Finance Flow</div><div class="tab-desc">Automatização de cobranças via Pix e relatórios de DRE simplificados.</div></button>
+      <button class="tab-btn" onclick="switchTab(3,'calendar')"><div class="tab-title">Calendar Sync</div><div class="tab-desc">Sincronização nativa e instantânea com a sua agenda pessoal Google.</div></button>
+      <button class="tab-btn" onclick="switchTab(4,'imoveis')"><div class="tab-title">Elite Imóveis</div><div class="tab-desc">Pipeline de negociações, visitas e matching automático para imobiliárias.</div></button>
+    </div>
+
+    <div class="showcase-stage">
+      <div class="showcase-panel active" id="panel-barber">
+        <div class="panel-header"><div class="panel-icon icon-wine"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div><div><div class="panel-tag">Preset · Núcleo Operacional</div><h2 class="panel-title">Barber Pro</h2></div></div>
+        <p class="panel-desc">Um sistema autônomo que atende seus clientes, negocia horários e confirma agendamentos automaticamente via WhatsApp 24 horas por dia. Libere o telefone e foque na cadeira.</p>
+        <ul class="panel-features">
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Motor de transbordo híbrido (IA pausa quando você quer intervir).</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Lembretes automáticos para reduzir abstenções.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gestão visual de fila de espera e comissionamento.</li>
+        </ul>
+        <div class="panel-actions"><a href="login.html#signup" class="btn-solid">Adicionar à Máquina</a><div class="price-tag">Ocupa 1 Slot <span>/ Inclusos no Plano Base</span></div></div>
+      </div>
+
+      <div class="showcase-panel" id="panel-crm">
+        <div class="panel-header"><div class="panel-icon icon-dark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="panel-tag">App · Extensão de Gestão</div><h2 class="panel-title">CRM Hub</h2></div></div>
+        <p class="panel-desc">Transforme cada interação do WhatsApp em um banco de dados organizado. Saiba exatamente quem são seus melhores clientes e quando eles devem voltar.</p>
+        <ul class="panel-features">
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Criação automática de perfis com histórico de mensagens.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Classificação inteligente (VIP, Em Risco, Inativo).</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cálculo de LTV em tempo real.</li>
+        </ul>
+        <div class="panel-actions"><a href="login.html#signup" class="btn-solid">Adicionar à Máquina</a><div class="price-tag">Ocupa 1 Slot <span>/ Instalação Imediata</span></div></div>
+      </div>
+
+      <div class="showcase-panel" id="panel-finance">
+        <div class="panel-header"><div class="panel-icon icon-gold"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="panel-tag">App · Módulo Financeiro</div><h2 class="panel-title">Finance Flow</h2></div></div>
+        <p class="panel-desc">O caixa do seu negócio sob controle automático. Gere links de pagamento, acompanhe recebimentos via PIX e tenha um painel claro de entradas e saídas.</p>
+        <ul class="panel-features">
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Lembretes e links de cobrança automáticos.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Painel com projeção de fluxo de caixa mensal.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Conciliação para repasse de comissões.</li>
+        </ul>
+        <div class="panel-actions"><a href="login.html#signup" class="btn-solid">Adicionar à Máquina</a><div class="price-tag">Ocupa 1 Slot <span>/ Instalação Imediata</span></div></div>
+      </div>
+
+      <div class="showcase-panel" id="panel-calendar">
+        <div class="panel-header"><div class="panel-icon icon-wine"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="panel-tag">Integração · Conector Nativo</div><h2 class="panel-title">G-Calendar Sync</h2></div></div>
+        <p class="panel-desc">Seu Nexus conectado diretamente à agenda do celular. Sincronização bidirecional que impede o robô de marcar clientes em horários bloqueados manualmente.</p>
+        <ul class="panel-features">
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Respeita bloqueios de horário e pausas configuradas.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Adiciona nome e telefone do cliente no evento.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Atualiza instantaneamente em cancelamentos.</li>
+        </ul>
+        <div class="panel-actions"><a href="sobre.html" class="btn-solid">Ver Documentação</a><div class="price-tag">0 Slots <span>/ Já Incluso</span></div></div>
+      </div>
+
+      <div class="showcase-panel" id="panel-imoveis">
+        <div class="panel-header"><div class="panel-icon icon-gold"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div><div class="panel-tag">Preset · Imobiliária</div><h2 class="panel-title">Elite Imóveis</h2></div></div>
+        <p class="panel-desc">Pipeline completo de captação, qualificação e fechamento para imobiliárias. O bot qualifica leads, faz matching com imóveis e agenda visitas automaticamente.</p>
+        <ul class="panel-features">
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Matching automático lead × imóvel por perfil e budget.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Pipeline Kanban com status de negociação em tempo real.</li>
+          <li><div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Follow-up automático e reativação de leads inativos.</li>
+        </ul>
+        <div class="panel-actions"><a href="login.html#signup" class="btn-solid">Adicionar à Máquina</a><div class="price-tag">Ocupa 1 Slot <span>/ Instalação Imediata</span></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="mega-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="f-brand-logo"><div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#322D29" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#322D29"/></svg></div><span class="name">Nexus</span></div></div>
+    <div class="footer-col"><h4>Presets</h4><ul><li><a href="presets.html">Barber Pro</a></li><li><a href="presets.html">Elite Imóveis</a></li><li><a href="presets.html">CRM Hub</a></li></ul></div>
+    <div class="footer-col"><h4>Empresa</h4><ul><li><a href="sobre.html">Sobre o Nexus</a></li><li><a href="precos.html">Preços</a></li><li><a href="lgpd.html">LGPD</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>BY NEXUS TECHNOLOGIES</span><span>© 2026 TODOS OS DIREITOS RESERVADOS</span></div>
+</footer>
+<script>
+function switchTab(index, panelId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn')[index].classList.add('active');
+  const offset = document.querySelectorAll('.tab-btn')[index].offsetTop;
+  if(window.innerWidth > 900) document.getElementById('indicator').style.transform = `translateY(${offset}px)`;
+  document.querySelectorAll('.showcase-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+</script>
+</body>
+</html>

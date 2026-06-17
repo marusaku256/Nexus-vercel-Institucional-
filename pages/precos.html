@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — Planos e Preços</title>
+<meta name="description" content="Planos transparentes para o Nexus OS. Starter gratuito, Pro para crescimento, Scale para franquias.">
+<link rel="stylesheet" href="../shared/globals.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+.pricing-header { text-align: center; padding: 100px 0 64px; }
+.pricing-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 72px); font-weight: 700; color: var(--dk); line-height: 1.05; margin-bottom: 20px; letter-spacing: -1px; }
+.pricing-subtitle { font-size: 18px; color: var(--dk60); max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+.billing-toggle { display: inline-flex; align-items: center; gap: 16px; background: rgba(255,255,255,.6); border: 1px solid rgba(50,45,41,.1); border-radius: 99px; padding: 8px 24px; cursor: pointer; transition: all .3s; }
+.toggle-switch { width: 40px; height: 22px; border-radius: 99px; background: var(--dk); position: relative; transition: background .3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .3s; }
+.billing-toggle.anual-active .toggle-switch { background: var(--wine); }
+.billing-toggle.anual-active .toggle-switch::after { transform: translateX(18px); }
+.toggle-lbl { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600; color: var(--dk40); transition: color .2s; }
+.toggle-lbl.active { color: var(--dk); }
+.discount-badge { background: rgba(201,168,76,.15); color: var(--gold); font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 100px; }
+.pricing-card { background: rgba(255,255,255,.55); border: 1px solid rgba(50,45,41,.1); border-radius: 28px; padding: 40px 32px; position: relative; transition: transform .3s, box-shadow .3s; }
+.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(50,45,41,.08); }
+.pricing-card.highlight { background: var(--dk); color: #EFE9E1; border-color: transparent; transform: scale(1.04); box-shadow: 0 24px 64px rgba(50,45,41,.2); }
+.pricing-card.highlight:hover { transform: scale(1.04) translateY(-4px); }
+.popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #fff; font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.plan-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+.plan-price { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; line-height: 1; margin-bottom: 4px; color: var(--wine); }
+.pricing-card.highlight .plan-price { color: var(--gold); }
+.plan-period { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 600; color: var(--dk40); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+.pricing-card.highlight .plan-period { color: rgba(239,233,225,.5); }
+.plan-desc { font-size: 14px; color: var(--dk60); line-height: 1.55; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--dk07); }
+.pricing-card.highlight .plan-desc { color: rgba(239,233,225,.65); border-bottom-color: rgba(239,233,225,.1); }
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--dk60); line-height: 1.4; }
+.pricing-card.highlight .feature-list li { color: rgba(239,233,225,.8); }
+.check-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.pricing-card:not(.highlight) .check-icon { background: rgba(46,125,50,.1); color: #2e7d32; }
+.pricing-card.highlight .check-icon { background: rgba(201,168,76,.15); color: var(--gold); }
+.btn-plan { width: 100%; padding: 16px; border-radius: 12px; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; text-align: center; cursor: pointer; transition: all .2s; border: 1px solid; }
+.btn-plan-outline { background: transparent; border-color: var(--dk20); color: var(--dk); }
+.btn-plan-outline:hover { background: #fff; border-color: var(--dk); }
+.btn-plan-solid { background: var(--gold); border-color: var(--gold); color: #fff; box-shadow: 0 8px 24px rgba(201,168,76,.2); }
+.btn-plan-solid:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201,168,76,.4); }
+@media (max-width: 1024px) { .pricing-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto 100px; } .pricing-card.highlight { transform: scale(1); } }
+@media (max-width: 768px) { .pricing-title { font-size: 40px; } }
+</style>
+</head>
+<body>
+<div class="brushed"></div>
+<nav class="inst-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#EFE9E1" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#EFE9E1"/></svg></div>
+    <span class="name">nexus</span>
+  </a>
+  <div class="nav-links">
+    <a href="sobre.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Sobre o Nexus</a>
+    <a href="presets.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Apps e Presets</a>
+    <a href="precos.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk);text-decoration:none;font-weight:700;">Preços</a>
+    <a href="vendas.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Enterprise</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-login">Entrar</a>
+    <a href="login.html#signup" class="btn-cta">Experimente o Nexus</a>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="pricing-header">
+    <h1 class="pricing-title">Planos transparentes.<br>Crescimento contínuo.</h1>
+    <p class="pricing-subtitle">Escolha o motor operacional adequado para a sua fase. Todos os planos incluem a estrutura Base do Nexus sem custos ocultos.</p>
+    <div class="billing-toggle" onclick="toggleBilling(this)">
+      <span class="toggle-lbl active" id="lbl-mensal">Mensal</span>
+      <div class="toggle-switch"></div>
+      <span class="toggle-lbl" id="lbl-anual">Anual</span>
+      <span class="discount-badge">Eco -20%</span>
+    </div>
+  </section>
+
+  <section class="pricing-grid">
+    <div class="pricing-card">
+      <h3 class="plan-name">Starter</h3>
+      <div class="plan-price">R$ 0</div>
+      <div class="plan-period">por mês</div>
+      <p class="plan-desc">Para profissionais autônomos iniciando a transição para o atendimento automatizado.</p>
+      <ul class="feature-list">
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span><strong>1 Slot Operacional</strong></span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Até 500 contatos</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Bot de atendimento básico</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Suporte via Email</span></li>
+      </ul>
+      <button class="btn-plan btn-plan-outline" onclick="window.location.href='login.html#signup'">Começar Gratuitamente</button>
+    </div>
+
+    <div class="pricing-card highlight">
+      <div class="popular-badge">Mais Escolhido</div>
+      <h3 class="plan-name">Pro</h3>
+      <div class="plan-price">R$ 499</div>
+      <div class="plan-period">por mês</div>
+      <p class="plan-desc">A máquina completa para negócios em crescimento. Motor híbrido e integrações avançadas.</p>
+      <ul class="feature-list">
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span><strong>10 Slots Operacionais</strong></span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Contatos Ilimitados</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Motor Híbrido IA + Humano</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Google Calendar integrado</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Suporte Prioritário</span></li>
+      </ul>
+      <button class="btn-plan btn-plan-solid" onclick="window.location.href='login.html#signup'">Criar Workspace Pro</button>
+    </div>
+
+    <div class="pricing-card">
+      <h3 class="plan-name">Scale</h3>
+      <div class="plan-price">R$ 1.499</div>
+      <div class="plan-period">por mês</div>
+      <p class="plan-desc">Para franquias e operações robustas com API própria e customização profunda.</p>
+      <ul class="feature-list">
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span><strong>20 Slots Ilimitados</strong></span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Múltiplos usuários / Equipe</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Acesso à API</span></li>
+        <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span>Gerente de Conta Dedicado</span></li>
+      </ul>
+      <button class="btn-plan btn-plan-outline" onclick="window.location.href='vendas.html'">Falar com Vendas</button>
+    </div>
+  </section>
+</main>
+
+<footer class="mega-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="f-brand-logo"><div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#322D29" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#322D29"/></svg></div><span class="name">Nexus</span></div></div>
+    <div class="footer-col"><h4>Produto</h4><ul><li><a href="sobre.html">Como Funciona</a></li><li><a href="presets.html">Apps e Presets</a></li><li><a href="precos.html">Preços</a></li></ul></div>
+    <div class="footer-col"><h4>Empresa</h4><ul><li><a href="sobre.html">Sobre o Nexus</a></li><li><a href="vendas.html">Enterprise</a></li><li><a href="lgpd.html">LGPD</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>BY NEXUS TECHNOLOGIES</span><span>© 2026 TODOS OS DIREITOS RESERVADOS</span></div>
+</footer>
+<script>
+function toggleBilling(el){ el.classList.toggle('anual-active'); document.getElementById('lbl-mensal').classList.toggle('active'); document.getElementById('lbl-anual').classList.toggle('active'); }
+</script>
+</body>
+</html>

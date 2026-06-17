@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — A Máquina Operacional do seu Negócio</title>
+<meta name="description" content="O sistema operacional que automatiza seu atendimento, agenda e financeiro. Um workspace modular que trabalha por você 24/7.">
+<link rel="stylesheet" href="../shared/globals.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+.hero-section { padding: 120px 0 80px; text-align: center; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(60px, 8vw, 96px); font-weight: 700; color: var(--dk); line-height: 1; margin-bottom: 32px; letter-spacing: -1px; }
+.hero-subtitle { font-size: 20px; color: var(--dk60); max-width: 700px; margin: 0 auto 48px; line-height: 1.6; }
+.hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 60px 0; border-top: 1px solid var(--dk12); border-bottom: 1px solid var(--dk12); margin-bottom: 80px; text-align: center; }
+.stat-num { font-family: 'Sora', sans-serif; font-size: 56px; font-weight: 400; color: var(--wine); line-height: 1; margin-bottom: 8px; letter-spacing: -2px; }
+.stat-lbl { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--dk60); }
+.section-heading { text-align: center; margin-bottom: 64px; }
+.section-heading h2 { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: var(--dk); margin-bottom: 16px; }
+.section-heading p { font-size: 16px; color: var(--dk60); max-width: 600px; margin: 0 auto; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 100px; }
+.feature-card { background: rgba(255,255,255,0.6); border: 1px solid rgba(50,45,41,.1); border-radius: 24px; padding: 48px 32px; transition: transform 0.3s; box-shadow: 0 12px 32px rgba(50,45,41,.03); }
+.feature-card:hover { transform: translateY(-8px); border-color: var(--gold); }
+.feat-icon { width: 56px; height: 56px; background: rgba(114,56,61,.08); color: var(--wine); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+.feature-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--dk); margin-bottom: 16px; }
+.feature-card p { font-size: 15px; color: var(--dk60); line-height: 1.6; }
+.use-cases { background: var(--dk); border-radius: 32px; padding: 80px; color: #EFE9E1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 100px; position: relative; overflow: hidden; }
+.use-cases::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+.uc-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700; margin-bottom: 24px; line-height: 1.1; }
+.uc-desc { font-size: 16px; color: rgba(239,233,225,.7); margin-bottom: 32px; line-height: 1.6; }
+.uc-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+.uc-list li { display: flex; align-items: center; gap: 12px; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; }
+.uc-list li::before { content: '✓'; color: var(--gold); font-size: 16px; }
+@media (max-width: 768px) { .hero-title { font-size: 48px; } .stats-grid { grid-template-columns: 1fr 1fr; } .features-grid { grid-template-columns: 1fr; } .use-cases { grid-template-columns: 1fr; padding: 40px; text-align: center; } }
+</style>
+</head>
+<body>
+<div class="brushed"></div>
+
+<nav class="inst-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#EFE9E1" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#EFE9E1"/></svg></div>
+    <span class="name">nexus</span>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item-dropdown">
+      <a>Conheça o Nexus <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+      <div class="nav-dropdown">
+        <a href="sobre.html">Sobre o Nexus</a>
+        <a href="presets.html">Apps e Presets</a>
+        <a href="sobre.html#seguranca">Segurança e IA</a>
+      </div>
+    </div>
+    <div class="nav-item-dropdown">
+      <a>Soluções <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+      <div class="nav-dropdown">
+        <a href="presets.html">Microempreendedores</a>
+        <a href="presets.html">Barbearias e Salões</a>
+        <a href="presets.html">Clínicas e Petshops</a>
+        <a href="presets.html">Imobiliárias</a>
+      </div>
+    </div>
+    <a href="precos.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Preços</a>
+    <a href="vendas.html" style="font-family:'Sora',sans-serif;font-size:12px;font-weight:500;color:var(--dk60);text-decoration:none;">Vendas Enterprise</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-login">Entrar</a>
+    <a href="login.html#signup" class="btn-cta">Experimente o Nexus</a>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="hero-section">
+    <h1 class="hero-title">A máquina operacional<br>do seu negócio.</h1>
+    <p class="hero-subtitle">Substitua softwares isolados por um único sistema operacional modular. Conecte atendimento, vendas e gestão financeira em engrenagens que trabalham por você.</p>
+    <div class="hero-actions">
+      <a href="login.html#signup" class="btn-solid" style="padding:16px 40px;font-size:14px;">Criar meu Workspace</a>
+      <a href="sobre.html" class="btn-outline" style="padding:15px 32px;font-size:14px;">Como funciona</a>
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <div><div class="stat-num">94%</div><div class="stat-lbl">Mensagens respondidas pelo bot</div></div>
+    <div><div class="stat-num">3s</div><div class="stat-lbl">Tempo médio de resposta</div></div>
+    <div><div class="stat-num">47h</div><div class="stat-lbl">Economizadas por mês</div></div>
+    <div><div class="stat-num">24/7</div><div class="stat-lbl">Atendimento ininterrupto</div></div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <h2>Uma máquina. Todos os processos.</h2>
+      <p>O Nexus não é mais um app. É o sistema operacional do seu negócio — modular, inteligente e sempre ligado.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+        <h3>Atendimento Automático</h3>
+        <p>O bot do Nexus responde, agenda e confirma via WhatsApp em menos de 3 segundos. Sem você precisar tocar no celular.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+        <h3>Motor Híbrido</h3>
+        <p>A IA atende e filtra seus clientes. Quando o assunto for crítico, a máquina pausa e te notifica para assumir o controle instantaneamente.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Slots Operacionais</h3>
+        <p>Adicione ou remova apps (Agenda, Financeiro, CRM) na sua engrenagem central pagando apenas pela capacidade que utilizar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="use-cases">
+    <div>
+      <h2 class="uc-title">Escalabilidade para<br>Microempreendedores</h2>
+      <p class="uc-desc">Desenvolvido para negócios que precisam de atendimento premium e uma operação que não dorme.</p>
+      <ul class="uc-list">
+        <li>Automação fiscal e lembretes de cobrança</li>
+        <li>Sincronização em tempo real com Google Calendar</li>
+        <li>Diretório universal: todo cliente salvo e classificado</li>
+      </ul>
+      <a href="presets.html" class="btn-solid gold" style="padding:14px 32px;font-size:12px;">Explorar Soluções</a>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <svg width="320" height="320" viewBox="0 0 200 200" fill="none">
+        <circle cx="100" cy="100" r="80" stroke="rgba(239,233,225,0.1)" stroke-width="2" stroke-dasharray="4 4"/>
+        <circle cx="100" cy="100" r="50" stroke="rgba(201,168,76,0.3)" stroke-width="4"/>
+        <circle cx="100" cy="100" r="25" fill="#EFE9E1"/>
+        <circle cx="100" cy="20" r="12" fill="var(--wine)"/>
+        <circle cx="175" cy="125" r="8" fill="var(--gold)"/>
+        <circle cx="25" cy="125" r="10" fill="rgba(239,233,225,0.5)"/>
+        <path d="M100 45 L100 75" stroke="rgba(239,233,225,0.2)" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+</main>
+
+<footer class="mega-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="f-brand-logo">
+        <div class="icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" stroke="#322D29" stroke-width="1.5" fill="none"/><polygon points="7,4 10,5.75 10,8.25 7,10 4,8.25 4,5.75" fill="#322D29"/></svg></div>
+        <span class="name">Nexus</span>
+      </div>
+      <div class="f-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3" stroke-linecap="round"/></svg><input type="text" placeholder="Como posso te ajudar?"></div>
+    </div>
+    <div class="footer-col"><h4>Produtos</h4><ul><li><a href="sobre.html">Motor Nexus</a></li><li><a href="presets.html">Loja de Apps</a></li><li><a href="precos.html">Preços e Slots</a></li></ul></div>
+    <div class="footer-col"><h4>Soluções</h4><ul><li><a href="presets.html">Barbearias</a></li><li><a href="presets.html">Imobiliárias</a></li><li><a href="presets.html">Clínicas</a></li></ul></div>
+    <div class="footer-col"><h4>Recursos</h4><ul><li><a href="sobre.html">FAQ</a></li><li><a href="vendas.html">API</a></li></ul></div>
+    <div class="footer-col"><h4>Empresa</h4><ul><li><a href="sobre.html">Sobre o Nexus</a></li><li><a href="lgpd.html">Privacidade (LGPD)</a></li><li><a href="vendas.html">Contato</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>BY NEXUS TECHNOLOGIES</span><span>© 2026 TODOS OS DIREITOS RESERVADOS</span></div>
+</footer>
+</body>
+</html>
