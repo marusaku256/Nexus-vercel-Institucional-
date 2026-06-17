@@ -1,13 +1,5 @@
 {
+  "outputDirectory": "pages",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/pages/index.html" },
-    { "source": "/precos", "destination": "/pages/precos.html" },
-    { "source": "/presets", "destination": "/pages/presets.html" },
-    { "source": "/sobre", "destination": "/pages/sobre.html" },
-    { "source": "/vendas", "destination": "/pages/vendas.html" },
-    { "source": "/login", "destination": "/pages/login.html" },
-    { "source": "/lgpd", "destination": "/pages/lgpd.html" }
-  ]
+  "trailingSlash": false
 }
